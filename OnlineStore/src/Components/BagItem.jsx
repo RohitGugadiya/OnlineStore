@@ -1,4 +1,14 @@
+import { useDispatch } from "react-redux"
+import { bagActions } from "../Store/bagSlice"
+
 const BagItem = ({item}) => {
+
+ const disptch =  useDispatch()
+
+ const handleRemoveItem = () =>{
+  disptch(bagActions.removeFromBag(item.id))
+
+ }
   
     return( <div className="bag-item-container">
         <div className="item-left-part">
@@ -10,7 +20,7 @@ const BagItem = ({item}) => {
           <div className="price-container">
             <span className="current-price">Rs {item.current_price}</span>
             <span className="original-price">Rs {item.original_price}</span>
-            <span className="discount-percentage">(${item.discount_percentage}% OFF)</span>
+            <span className="discount-percentage">({item.discount_percentage}% OFF)</span>
           </div>
           <div className="return-period">
             <span className="return-period-days">{item.return_period} days</span> return available
@@ -21,7 +31,7 @@ const BagItem = ({item}) => {
           </div>
         </div>
     
-        <div className="remove-from-cart" onClick={()=>console.log("remove")}>X</div>
+        <div className="remove-from-cart" onClick={handleRemoveItem}>X</div>
       </div>)
 }
 export default BagItem
